@@ -47,7 +47,6 @@ while True:
         stack.push()
     elif(choice == 3):
         value = stack.pop()
-        stack.pop()
         print("Popped:", value)
     elif(choice == 4):
         stack.peek()
