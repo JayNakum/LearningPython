@@ -1,9 +1,9 @@
-# Vigenere Cupher
+# Vigenere Cipher
 
-def getChar(code: int) -> str:
+def getChar(code:int) -> str:
     return chr(code % 26 + 97)
 
-def getCode(char: str) -> int:
+def getCode(char:str) -> int:
     return (ord(char) - 97)
 
 
