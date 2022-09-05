@@ -10,26 +10,17 @@ def getCode(char:str) -> int:
 def encrypt(plainText:str, key:str) -> str:
     cipher = ''
 
-    splitText = []
-    for char in plainText:
-        splitText.append(char)
+    splitText = [getCode(char) for char in plainText]
 
     splitKey = []
-
     i = 0
     for _ in splitText:
-        splitKey.append(key[i % len(key)])
+        splitKey.append(getCode(key[i % len(key)]))
         i += 1
 
-    splitText = [getCode(i) for i in splitText]
-    splitKey = [getCode(i) for i in splitKey]
-
     splitCipher = []
-
     for i in range(len(splitKey)):
-        splitCipher.append(splitText[i] + splitKey[i])
-
-    splitCipher = [getChar(i) for i in splitCipher]
+        splitCipher.append(getChar(splitText[i] + splitKey[i]))
 
     for char in splitCipher:
         cipher += char
@@ -40,26 +31,17 @@ def encrypt(plainText:str, key:str) -> str:
 def decrypt(cipherText:str, key:str) -> str:
     message = ''
 
-    splitText = []
-    for char in cipherText:
-        splitText.append(char)
+    splitText = [getCode(char) for char in cipherText]
 
     splitKey = []
-
     i = 0
     for _ in splitText:
-        splitKey.append(key[i % len(key)])
+        splitKey.append(getCode(key[i % len(key)]))
         i += 1
 
-    splitText = [getCode(i) for i in splitText]
-    splitKey = [getCode(i) for i in splitKey]
-
     splitCipher = []
-
     for i in range(len(splitKey)):
-        splitCipher.append(splitText[i] - splitKey[i])
-
-    splitCipher = [getChar(i) for i in splitCipher]
+        splitCipher.append(getChar(splitText[i] - splitKey[i]))
 
     for char in splitCipher:
         message += char
