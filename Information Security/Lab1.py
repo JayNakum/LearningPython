@@ -61,6 +61,8 @@ if __name__ == "__main__":
     message = input('Enter your message: ')
     key = int(input('Enter key: '))
 
-    cipher = decrypt(key, message)
-
+    cipher = encrypt(key, message)
     print(cipher)
+    
+    plainText = decrypt(key, cipher)
+    print(plainText)

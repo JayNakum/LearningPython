@@ -25,7 +25,7 @@ def getKeyMatrix(key: str) -> list:
         if (count % 5 == 0):
             keyMatrix.append(row)
             row = []
-    print(keyMatrix)
+    # print(keyMatrix)
     return keyMatrix
 
 def getPosFromMatrix(char:str, matrix:list) -> tuple:
@@ -59,7 +59,7 @@ def getPairs(message:str) -> list:
         pair = p1 + p2
         pairs.append(pair)
 
-    print(pairs)
+    # print(pairs)
     return pairs
 
 def encrypt(key:str, message:str) -> str:
@@ -106,18 +106,10 @@ def decrypt(key:str, cipher:str) -> str:
 
 
 if __name__ == "__main__":
-    # message = input('Enter your message: ')
-    # key = int(input('Enter key: '))
-    key = 'occurence'
-    # o c u r e
-    # n a b d f
-    # g h i k l
-    # m p q s t
-    # v w x y z
-    message = 'talltrees'
+    message = input('Enter your message: ')
+    key = input('Enter key: ')
 
     cipher = encrypt(key, message)
     print(cipher)
     plaintext = decrypt(key, cipher)
     print(plaintext)
-    

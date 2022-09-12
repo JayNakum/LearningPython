@@ -122,10 +122,8 @@ def decrypt(plainText: str, key:str) -> str:
     return plainText
 
 if __name__ == "__main__":
-    # message = input('Enter your message: ')
-    # key = input('Enter your key: ')
-    message = 'attackpostponeduntiltwoam'
-    key ='4312567'
+    message = input('Enter your message: ')
+    key = input('Enter your key: ')
 
     print('Old Method')
     cipher = d_encrypt(message)
@@ -138,6 +136,3 @@ if __name__ == "__main__":
     print(cipher)
     plainText = decrypt(cipher, key)
     print(plainText)
-
-
-# by Jay Nakum [20BCP304D]

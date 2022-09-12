@@ -77,5 +77,3 @@ if __name__ == "__main__":
 
     plainText2 = decrypt(pt, key)
     print(plainText2)
-
-# Jay Nakum [20BCP304D]
