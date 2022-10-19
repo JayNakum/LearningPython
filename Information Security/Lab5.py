@@ -2,11 +2,43 @@
 
 import numpy as np
 
-def getChar(code:int) -> str:
+
+def getChar(code: int) -> str:
     return chr(code % 26 + 97)
 
-def getCode(char:str) -> int:
+
+def getCode(char: str) -> int:
     return (ord(char) - 97) % 26
+
+
+def modInverse(a: int, m: int) -> int:
+    a %= m
+    for x in range(m):
+        if ((a * x) % m == 1):
+            return x
+    return 1
+
+
+def multiply(key: list, message: list, n: int) -> list:
+    result = []
+
+    resultMatrix = [[0 for _ in range(n)] for _ in range(n)]
+
+    for i in range(len(key)):
+        for j in range(len(message[0])):
+            for k in range(len(message)):
+                resultMatrix[i][j] += key[i][k] * message[k][j]
+    # print(resultMatrix)
+
+    for i in range(n):
+        x = resultMatrix[i][0]
+        while (x > 26):
+            x %= 26
+        result.append(x)
+
+    # print(result)
+    return result
+
 
 def getKeyMatrix(key: str, n: int) -> list:
     keyMatrix = []
@@ -22,10 +54,25 @@ def getKeyMatrix(key: str, n: int) -> list:
     # print(keyMatrix)
     return keyMatrix
 
+
+def getInverseKeyMatrix(key: list) -> list:
+    keyMatrix = np.array(key).T
+    inverse = np.linalg.inv(keyMatrix)
+    determinant = np.linalg.det(keyMatrix)
+    adjoint = (inverse.T * determinant)
+
+    keyInverse = (modInverse(int(determinant), 26) * adjoint) % 26
+    print(keyInverse)
+    # 25 22
+    #  1 23
+
+    return keyInverse
+
+
 def getMessageVectors(message: str, n: int) -> list:
     while (len(message) % n != 0):
         message += 'x'
-    
+
     messageVectors = []
 
     i = 0
@@ -35,30 +82,9 @@ def getMessageVectors(message: str, n: int) -> list:
             vector.append([getCode(message[i])])
             i += 1
         messageVectors.append(vector)
-    
+
     # print(messageVectors)
     return messageVectors
-
-def multiply(key: list, message: list, n: int) -> list:
-    result = []
-
-    resultMatrix = [[0 for _ in range(n)] for _ in range(n)]
-
-    for i in range(len(key)):
-        for j in range(len(message[0])):
-            for k in range(len(message)):
-                resultMatrix[i][j] += key[i][k] * message[k][j]
-
-    # print(resultMatrix)
-
-    for i in range(n):
-        x = resultMatrix[i][0]
-        while (x > 26):
-            x %= 26
-        result.append(x)
-
-    # print(result)
-    return result
 
 
 def encrypt(message: str, key: str, n: int) -> str:
@@ -77,15 +103,21 @@ def encrypt(message: str, key: str, n: int) -> str:
 
     return cipherText
 
-def decrypt(message: str, key: str, n: int) -> str:
-    plainText = ''
+
+def decrypt(key: str, message: str, n: int) -> str:
     messageVectors = getMessageVectors(message, n)
-    keyMatrix = np.array(getKeyMatrix(key, n))
+    keyMatrix = getKeyMatrix(key, n)
+    inverseKeyMatrix = getInverseKeyMatrix(keyMatrix)
 
-    print(np.linalg.inv(keyMatrix))
+    plainText = ""
 
+    for vector in messageVectors:
+        resultVector = multiply(inverseKeyMatrix, vector, n)
+        for code in resultVector:
+            plainText += getChar(int(code))
 
     return plainText
+
 
 if __name__ == '__main__':
     message = 'exam'.lower()
