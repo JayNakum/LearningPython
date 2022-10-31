@@ -1,4 +1,5 @@
 # PLAYFAIR CIPHER
+# Experiment 2
 
 def getKeyMatrix(key: str) -> list:
     keyMatrix = []

@@ -1,5 +1,5 @@
 # RSA Algorithm
-# Experiment 8
+# Experiment 9
 
 import random
 import math
@@ -27,11 +27,11 @@ def getD():
     # print(d)
     return d
 
-def encryption(M,e,n):
-    return pow(M,e)%n
+def encryption(M,d,n):
+    return pow(M,d)%n
 
-def decryption(encrypted,d,n):
-    return pow(encrypted,d)%n
+def decryption(encrypted,e,n):
+    return pow(encrypted,e)%n
 
 if __name__ == "__main__":
     n = p * q
@@ -39,7 +39,8 @@ if __name__ == "__main__":
     
     e = getE()
     d = getD()
-    encrypt_text = encryption(M,e,n)
-    print("Encrypted Message :",encrypt_text)
-    decrypt_text = decryption(encrypt_text,d,n)
-    print("Decrypted Message :",decrypt_text)
+    encrypt_text = encryption(M,d,n)
+    print("Digital Key :",encrypt_text)
+    decrypt_text = decryption(encrypt_text,e,n)
+    print("M1 :",decrypt_text)
+    print("M :", M)

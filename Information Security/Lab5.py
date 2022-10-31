@@ -1,7 +1,10 @@
 # Hill Cipher
+# Lab 5 and 6
+# Experiment 6 
 
-import numpy as np
-
+import numpy
+from numpy import matrix
+from numpy import linalg
 
 def getChar(code: int) -> str:
     return chr(code % 26 + 97)
@@ -55,19 +58,32 @@ def getKeyMatrix(key: str, n: int) -> list:
     return keyMatrix
 
 
-def getInverseKeyMatrix(key: list) -> list:
-    keyMatrix = np.array(key).T
-    inverse = np.linalg.inv(keyMatrix)
-    determinant = np.linalg.det(keyMatrix)
-    adjoint = (inverse.T * determinant)
+# def getInverseKeyMatrix(key: list) -> list:
+#     keyMatrix = numpy.array(key).T
+#     inv = numpy.linalg.inv(keyMatrix) * numpy.linalg.det(keyMatrix) % 26
+#     inverse = 26-inv
+#     inverse = numpy.round(inverse)
+#     # print(inverse)
+#     return inverse
 
-    keyInverse = (modInverse(int(determinant), 26) * adjoint) % 26
-    print(keyInverse)
-    # 25 22
-    #  1 23
+def moduloInverse(det):
+    for i in range(1, 26, 1):
+        if (i*det) % 26 == 1:
+            return i
 
-    return keyInverse
+def getInverseKeyMatrix(key_matrix):
+    det = numpy.linalg.det(key_matrix)
+    adj = numpy.linalg.inv(key_matrix)*det
+    adj = adj.astype(int)
 
+    det = det % 26
+    det = round(det)
+    det = moduloInverse(det)
+    
+    inv = adj*det
+    inv = inv % 26
+
+    return inv
 
 def getMessageVectors(message: str, n: int) -> list:
     while (len(message) % n != 0):
@@ -93,36 +109,39 @@ def encrypt(message: str, key: str, n: int) -> str:
     keyMatrix = getKeyMatrix(key, n)
 
     resultVectors = []
-    for msg in messageVectors:
-        resultVectors.append(multiply(keyMatrix, msg, n))
+    for vector in messageVectors:
+        resultVectors.append(multiply(keyMatrix, vector, n))
     # print(resultVectors)
 
     for result in resultVectors:
         for r in result:
             cipherText += getChar(r)
 
+    # print(cipherText)
     return cipherText
 
-
-def decrypt(key: str, message: str, n: int) -> str:
+def decrypt(message: str, key: str, n: int) -> str:
     messageVectors = getMessageVectors(message, n)
     keyMatrix = getKeyMatrix(key, n)
-    inverseKeyMatrix = getInverseKeyMatrix(keyMatrix)
+    inverseKeyMatrix = getInverseKeyMatrix(numpy.array(keyMatrix))
 
     plainText = ""
-
+    resultVectors = []
     for vector in messageVectors:
-        resultVector = multiply(inverseKeyMatrix, vector, n)
-        for code in resultVector:
-            plainText += getChar(int(code))
+        resultVectors.append(multiply(inverseKeyMatrix, vector, n))
+    
+    # print(resultVectors)
+    for result in resultVectors:
+        for r in result:
+            plainText += getChar(int(r))
 
     return plainText
 
 
 if __name__ == '__main__':
-    message = 'exam'.lower()
-    key = 'hill'.lower()
-    n = 2
+    message = 'abcdefghi'.lower()
+    key = 'hillciphe'.lower()
+    n = 3
 
     cipher = encrypt(message, key, n)
     print('Encryption:', cipher)
