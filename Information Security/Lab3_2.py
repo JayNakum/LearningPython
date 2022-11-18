@@ -1,5 +1,4 @@
-# Double Transposition
-# Experiment 4
+# Experiment 4: Double Transposition
 
 def encrypt(plainText: str, key: str) -> str :
     matrix = []

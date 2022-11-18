@@ -1,5 +1,4 @@
-# PLAYFAIR CIPHER
-# Experiment 2
+# Experiment 2: Playfair Cipher
 
 def getKeyMatrix(key: str) -> list:
     keyMatrix = []

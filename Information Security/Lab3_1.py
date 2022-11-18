@@ -1,5 +1,4 @@
-# Rail Fence Cipher
-# Experiment 3
+# Experiment 3: Rail Fence Cipher
 
 def d_encrypt(plainText: str) -> str:
     cipher = ''

@@ -1,5 +1,4 @@
-# CAESER CIPHER
-# Experiment 1
+# Experiment 1: Caeser Cipher
 
 def encrypt(key: int, message: str) -> str:
     

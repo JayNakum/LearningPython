@@ -1,6 +1,5 @@
-# Hill Cipher
 # Lab 5 and 6
-# Experiment 6 
+# Experiment 6: Hill Cipher
 
 import numpy
 from numpy import matrix
@@ -56,15 +55,6 @@ def getKeyMatrix(key: str, n: int) -> list:
 
     # print(keyMatrix)
     return keyMatrix
-
-
-# def getInverseKeyMatrix(key: list) -> list:
-#     keyMatrix = numpy.array(key).T
-#     inv = numpy.linalg.inv(keyMatrix) * numpy.linalg.det(keyMatrix) % 26
-#     inverse = 26-inv
-#     inverse = numpy.round(inverse)
-#     # print(inverse)
-#     return inverse
 
 def moduloInverse(det):
     for i in range(1, 26, 1):

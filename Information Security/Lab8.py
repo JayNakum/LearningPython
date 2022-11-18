@@ -1,5 +1,4 @@
-# RSA Algorithm
-# Experiment 9
+# Experiment 9: Reverse RSA Algorithm
 
 import random
 import math
