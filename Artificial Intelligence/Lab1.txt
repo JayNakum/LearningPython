@@ -1,0 +1,88 @@
+Searching: Universal problem solving
+	Search Space: set of possible solutions
+	Start State: start state
+	Goal Test: function to check if we have reached the goal
+
+Theory
+Modeling: convert any problem in terms of computational problem 
+	  that can be solved by computer
+Algorithm
+Application
+
+Search Tree: convert a problem into a tree form, root == initial state
+
+Actions: possible actions from current state
+
+Transition Model: 
+
+Path Cost: cost to reach destination
+
+Solution
+
+Optimal Solution
+
+------------------------------------------
+
+Properties of searching algorihm
+Completeness: If solution exist, then it gurantees to return a solution
+Optimality: It gurantees to be the best solution
+Time Complexity
+Space Complexity
+Systematicity: Each node is visited once
+
+-------------------------------------------
+
+Time and space complexity measure in term of
+b: max branching factor : maximum number of possible actions
+d: depth of the least cost solution
+m: max depth of the state space
+
+------------------------------------------
+
+Types of searching algorithm
+Uninformed/Blind Search : only start and goal state is known
+Informed Search: start + goal + heuristic function (says if we are moving in the right direction)
+
+------------------------------------------
+
+DFS
+uses stack
+not complete: only complete in finite state space
+time complexity: O(b^m)
+space complexity: O(b*m)
+not optimal
+
+------------------------------------------
+
+Implementation
+
+a= {e,b,g}
+b= {a,h,g,f,c}
+c= {b,h,d}
+d= {c,e}
+e= {a,d,f}
+f= {e,b}
+g= {a,b}
+h= {b,c}
+
+bool visited[nodeCount] = false
+node path = []
+
+stack
+
+NOTE: GOAL IS TO FIND THE NODE, NOT PATH
+
+
+-----------------------------------------
+
+DFS(V)
+if(V == goal)
+	return path;
+else
+	visited[V] = true
+	path += V
+	for v in adj_V:
+		if (!visited[v])
+			DFS(v)
+	if (all node are visited)
+		pop()

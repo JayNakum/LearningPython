@@ -1,0 +1,41 @@
+How to convert graph into tree
+
+dont explore goal
+dont add existing paths
+
+  B - E
+ / \
+A   D - F - H
+ \ /   /
+  C   /
+   \ /
+    G
+
+    D
+   / \
+  C   F
+ /   / \   /
+G   G   H E G H
+
+open_stack	close
+[A]		[]
+[B,C]		[A]
+[D,E,C]		[A,B]
+[C,F,E,C]	[A,B,D]
+[G,F,E,C]	[A,B,D,C]
+		[A,B,D,C,G]
+
+
+-----------------------------------
+
+Jug1 = 5L
+Jug2 = 4L
+
+S(0,0)
+G(2,0)
+
+1) fill
+2) empty
+3) transfer
+
+	(0,0)

@@ -1,0 +1,18 @@
+BFS
+- uses queue
+- completeness
+- time complexity = b^d
+- space complexity = b^d
+- optimal
+
+--------------------------------------------------------
+Implementation
+BFS(G,s)
+	Q.enqueue(s)
+	visited[s] = True
+	while (Q is not empty OR S is not goal)
+		v = Q.dequeue()
+		for (neighbor of v in G)
+			if (!visited[w])
+				Q.enqueue(w)
+				visited[w] = True
